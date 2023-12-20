@@ -14,3 +14,7 @@ input CreateUserInput {
   firstname: String!
   lastname: String!
 }
+
+type Mutation {
+  createUser(input: CreateUserInput!): User!
+}
