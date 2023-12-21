@@ -15,8 +15,6 @@ const authMiddleware = (req, res, next) => {
   next();
 };
 
-console.log("after middelware");
-
 //resolvers
 const root = {
   //{id} user sending the request
@@ -41,20 +39,20 @@ const root = {
   },
 };
 
-const app = console.log("hello");
+const app = express();
 
-// const app = express();
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: schema,
+    rootValue: root,
+    graphiql: true,
+  })
+);
 
-// app.get("/healthcheck", (req: any, res: any) => {
-//   res.json({"msg": "hi"});
-// })
-// app.use('/graphql', graphqlHTTP({
-//   schema: schema,
-//   rootValue: root,
-//   graphiql: true,
-// }));
-
-// const PORT = 4000;
-// app.listen(PORT, () => {
-//   console.log(`Running a GraphQL API server at http://localhost:${PORT}/graphql`);
-// });
+const PORT = 4000;
+app.listen(PORT, () => {
+  console.log(
+    `Running a GraphQL API server at http://localhost:${PORT}/graphql`
+  );
+});
